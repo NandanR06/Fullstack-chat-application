@@ -46,7 +46,7 @@ const ChatContainer = () => {
             key={message._id}
             ref={index === messages.length - 1 ? lastMessageRef : null}
             className={`chat ${
-              message.senderId === authUser._id ? "chat-start" : "chat-end"
+              message.senderId === authUser._id ? "chat-start" : "chat-end "
             }`}
           >
             <div className="chat-image avatar">
@@ -62,7 +62,7 @@ const ChatContainer = () => {
               </div>
             </div>
             <div className="chat-header mb-1 flex flex-col">
-              <div className="chat-bubble flex flex-col text-[17px]">
+              <div className="chat-bubble flex bg-primary/60 flex-col text-[17px]">
                 {message.image && (
                   <img
                     src={message.image}
