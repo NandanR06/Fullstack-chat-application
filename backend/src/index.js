@@ -8,7 +8,6 @@ import cookieParser from "cookie-parser";
 import messagerouter from './routers/message.route.js'
 import {app,server } from "./lib/socket.js";
 import path from "path";
-import { fileURLToPath } from "url";
 
 dotenv.config();
 
@@ -19,28 +18,25 @@ const PORT = process.env.PORT || 5000;
 // const app = express();
 
 
-
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-// Serve static files from frontend/dist
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
-
-// Catch-all route to serve `index.html`
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
-});
-
-
 app.use(cors({
-  origin: "https://fullstack-chat-application-hc4x.onrender.com",
+  origin: "http://localhost:5173",
   credentials: true,
 }));
 app.use(express.json());
-// app.use(morgan("dev"));   
+app.use(morgan("dev"));   
 app.use(cookieParser());
 
 
+const __dirname = path.resolve();
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+
+});
+}
 
 
 // import the router
