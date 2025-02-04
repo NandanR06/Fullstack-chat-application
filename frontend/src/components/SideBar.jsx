@@ -5,7 +5,7 @@ import { Users } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 
 const SideBar = () => {
-  const { getUsers, users = [], selectedUser, isUserLoading, setSelectedUser } =
+  const { getUsers, users, selectedUser, isUserLoading, setSelectedUser } =
     useChatStore();
   const { onlineUsers } = useAuthStore();
   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
@@ -47,7 +47,7 @@ const SideBar = () => {
       </div>
 
       <div className="overflow-y-auto w-full py-3 h-110">
-        {Array.isArray(filteredUsers) &&
+        {
           filteredUsers.map((user) => (
             <button
               key={user._id}
