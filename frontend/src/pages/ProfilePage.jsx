@@ -76,7 +76,7 @@ const ProfilePage = () => {
           <h2 className="text-sm font-medium text-gray-600">Account Info</h2>
           <div className="text-xs flex justify-between mt-2">
             <span>Member Since</span>
-            <span>{date.split("-").reverse().join("-")}</span>
+            <span>{date}</span>
           </div>
           <div className="text-xs flex justify-between mt-2">
             <span>Status</span>
