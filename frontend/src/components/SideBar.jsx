@@ -11,12 +11,12 @@ const SideBar = () => {
   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
 
   useEffect(() => {
-    //  if (!users || !Array.isArray(users)) {
+     if (!users || !Array.isArray(users)) {
     getUsers();
     console.log({ users });
     
-    // }
-  }, [getUsers]);
+     }
+  }, [getUsers,users]);
 
   const filteredUsers = showOnlineOnly
     ? users.filter((user) => onlineUsers.includes(user?._id))
@@ -34,22 +34,22 @@ const SideBar = () => {
 
         <div className="mt-3 hidden lg:flex items-center gap-2">
           <label className="cursor-pointer flex items-center gap-2">
-            {/* <input
+            <input
               type="checkbox"
               checked={showOnlineOnly}
               onChange={(e) => setShowOnlineOnly(e.target.checked)}
               className="checkbox checkbox-sm"
-            /> */}
-            {/* <span className="text-sm">Show online only</span> */}
+            />
+            <span className="text-sm">Show online only</span>
           </label>
           <span className="text-xs text-zinc-500">
-            {/* ({(onlineUsers?.length || 0) - 1} online) */}
+            ({(onlineUsers?.length || 0) - 1} online)
           </span>
         </div>
       </div>
 
       <div className="overflow-y-auto w-full py-3 h-110">
-        {Array.isArray(users) &&  users.map((user) => (
+        {Array.isArray(filteredUsers) &&  filteredUsers.map((user) => (
           <button
             key={user._id}
             onClick={() => setSelectedUser(user)}
