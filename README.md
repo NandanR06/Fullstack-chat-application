@@ -59,9 +59,10 @@ npm run dev
 ### **1️⃣ Clone the repository**
 
 git clone https://github.com/NandanR06/Fullstack-chat-application
+
 cd chat-app
 
 ## 🌍 Deployment  
 This app is deployed on **Render**. You can access it here:  
 
-🔗 **Live Demo**: (https://fullstack-chat-application-1u7h.onrender.com/)  
+🔗 **Live Demo**:   (https://fullstack-chat-application-1u7h.onrender.com/)  
