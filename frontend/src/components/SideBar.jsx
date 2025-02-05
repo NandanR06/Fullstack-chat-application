@@ -11,9 +11,9 @@ const SideBar = () => {
   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
 
   useEffect(() => {
-    // if (!users || !Array.isArray(users)) {
+    //  if (!users || !Array.isArray(users)) {
       getUsers();
-    // }
+    //  }
   }, [getUsers]);
 
   const filteredUsers = showOnlineOnly
@@ -47,7 +47,7 @@ const SideBar = () => {
       </div>
 
       <div className="overflow-y-auto w-full py-3 h-110">
-        {
+        {Array.isArray(filteredUsers) &&
           filteredUsers.map((user) => (
             <button
               key={user._id}
