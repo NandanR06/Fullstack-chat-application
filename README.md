@@ -41,10 +41,10 @@ A modern real-time chat application with authentication, online user tracking, t
 
 
 ---
-```sh
+
 ### **3️⃣ Start the backend server**
 
-cd backend
+cd backend 
 npm run dev
 
 ### **4️⃣ Start the frontend**
