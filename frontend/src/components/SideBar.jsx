@@ -13,12 +13,12 @@ const SideBar = () => {
   useEffect(() => {
     //  if (!users || !Array.isArray(users)) {
       getUsers();
-    //  }
+      // }
   }, [getUsers]);
 
   const filteredUsers = showOnlineOnly
-    ? (users || []).filter((user) => onlineUsers.includes(user?._id))
-    : users || [];
+    ? (users).filter((user) => onlineUsers.includes(user?._id))
+    : users ;
 
   if (isUserLoading) return <SidebarSkeleton />;
 

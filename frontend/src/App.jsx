@@ -38,7 +38,6 @@ function App() {
         <Route
           path="/"
           element={authUser ? <HomePage /> : <Navigate to="/login" />}
-          // element={<HomePage/>}
         />
         <Route
           path="/signup"
