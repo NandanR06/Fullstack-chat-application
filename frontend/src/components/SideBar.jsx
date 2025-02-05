@@ -13,6 +13,8 @@ const SideBar = () => {
   useEffect(() => {
     //  if (!users || !Array.isArray(users)) {
     getUsers();
+    console.log({ users });
+    
     // }
   }, [getUsers]);
 
