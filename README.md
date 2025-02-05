@@ -45,11 +45,13 @@ A modern real-time chat application with authentication, online user tracking, t
 ### **3️⃣ Start the backend server**
 
 cd backend 
+
 npm run dev
 
 ### **4️⃣ Start the frontend**
 
 cd frontend
+
 npm run dev
 
 ## 🔧 Installation  
