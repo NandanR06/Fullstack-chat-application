@@ -25,7 +25,7 @@ export const useAuthStore = create((set, get) => ({
       // Ensure res.data is a valid object (not undefined, null, or an array)
       const userData = (res.data !== undefined && res.data !== null) 
         ? res.data 
-        : fasle;
+        : false;
   
       get().connectSocket();
       set({ authUser: userData });
