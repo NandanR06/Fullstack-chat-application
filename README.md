@@ -41,15 +41,17 @@ A modern real-time chat application with authentication, online user tracking, t
 
 
 ---
-```sh
+
 ### **3️⃣ Start the backend server**
 
-cd backend
+cd backend 
+
 npm run dev
 
 ### **4️⃣ Start the frontend**
 
 cd frontend
+
 npm run dev
 
 ## 🔧 Installation  
@@ -57,9 +59,10 @@ npm run dev
 ### **1️⃣ Clone the repository**
 
 git clone https://github.com/NandanR06/Fullstack-chat-application
+
 cd chat-app
 
 ## 🌍 Deployment  
 This app is deployed on **Render**. You can access it here:  
 
-🔗 **Live Demo**: (https://fullstack-chat-application-1u7h.onrender.com/)  
+🔗 **Live Demo**:   (https://fullstack-chat-application-1u7h.onrender.com/)  
