@@ -123,6 +123,10 @@ export const updateProfile = async (req, res) => {
 
 export const checkAuth = async (req, res) => {
   try {
+    console.log("req.user", req.user);
+    if(!req.user){
+      return res.status(400).json({ message: "User not found" });
+    } 
     
     res.status(200).json(req.user);
   } catch (error) {
