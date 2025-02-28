@@ -23,9 +23,9 @@ export const useAuthStore = create((set, get) => ({
       const res = await axiosInstance.get("/auth/check");
   
       // Ensure res.data is a valid object (not undefined, null, or an array)
-      const userData = (res.data !== undefined && typeof res.data === "object" && res.data !== null && !Array.isArray(res.data)) 
+      const userData = (res.data !== undefined && res.data !== null) 
         ? res.data 
-        : null;
+        : fasle;
   
       get().connectSocket();
       set({ authUser: userData });
