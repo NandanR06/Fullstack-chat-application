@@ -3,7 +3,8 @@ import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
 
-const BASEURL = import.meta.env.MODE ===  "development" ? "http://localhost:5000" : "/";
+const BASEURL =
+  import.meta.env.MODE === "development" ? "http://localhost:5000" : "/";
 
 // const BASEURL = "https://fullstack-chat-app-server.onrender.com"
 export const useAuthStore = create((set, get) => ({
@@ -11,6 +12,7 @@ export const useAuthStore = create((set, get) => ({
   isSigningUp: false,
   islogingIng: false,
   isUpdatingProfile: false,
+  emailOTP: "",
   // checking is user login or not
   isCheckingAuth: true,
   onlineUsers: [],
@@ -43,6 +45,27 @@ export const useAuthStore = create((set, get) => ({
       set({ isSigningUp: false });
     }
   },
+
+  // verify the number
+  verifyEmails: async (data) => {
+    console.log(typeof(data));
+    try {
+       
+      const res = await axiosInstance.post("/auth/email-verify",{ email: data });
+      
+      toast.success(res.data.message || "OTP Sent Successfully"); 
+      console.log(res.data);
+      set({ emailOTP: res.data.otp });
+      console.log("emailOTP", get().emailOTP);
+      
+      
+    } catch (error) {
+      console.error("Error verifying Email:", error);
+      const errorMessage = error.response?.data?.message || "Something went wrong!";
+      toast.error(errorMessage);
+    }
+  },
+  
   // -----------------------------logout--------------------------------------
   logout: async () => {
     try {
@@ -92,12 +115,12 @@ export const useAuthStore = create((set, get) => ({
     socket.connect();
     set({ socket: socket });
 
-    socket.on("getOnlineUsers",(userId) => {
+    socket.on("getOnlineUsers", (userId) => {
       set({ onlineUsers: userId });
     });
   },
 
-// disconnection of the socket like logout 
+  // disconnection of the socket like logout
   disconnectSocket: () => {
     if (get().socket?.connected) get().socket.disconnect();
   },

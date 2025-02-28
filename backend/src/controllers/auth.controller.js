@@ -2,7 +2,8 @@ import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../lib/token.js";
 import cloudinary from "../lib/cloudinary.js";
-
+import { generateOtp } from "../lib/otp.js";
+import nodemailer from "nodemailer"
 //--------------------------auth signup-----------------------------------//
 export const signup = async (req, res) => {
   const { email, password, fullName } = req.body;
@@ -128,3 +129,42 @@ export const checkAuth = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+// verify the emaial
+export const verifyEmail = async (req, res) => {
+  const { email } = req.body;
+  const mail = email.trim()
+  const otp = generateOtp();
+  const transporter = nodemailer.createTransport({
+    host: process.env.EMAIL_HOST,
+    port: process.env.EMAIL_PORT,
+    secure: false,
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+
+  const mailOptions = {
+    from: `"ReChat Support" <${process.env.EMAIL_USER}>`,
+    to: mail,
+    subject: "Your OTP Code for ReChat",
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 500px; padding: 20px; border: 1px solid #ddd;">
+        <h2 style="color: #2D89FF;">🔒 ReChat OTP Verification</h2>
+        <p>Hello,</p>
+        <p>Your OTP code is: <strong style="font-size: 18px; color: #FF5733;">${otp}</strong></p>
+        <p>Please enter this code to verify your account. This OTP will expire in <b>5 minutes</b>.</p>
+        <hr />
+        <p style="font-size: 12px; color: #777;">If you didn’t request this, please ignore this email.</p>
+      </div>
+    `
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ success: true, message: "OTP sent to your mail successfully!",otp : otp });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Failed to send OTP", error: error.message });
+  }
+};
+
