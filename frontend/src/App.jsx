@@ -19,7 +19,7 @@ function App() {
   useEffect(() => {
      checkAuth();
     console.log({onlineUsers});
-  }, [authUser]); 
+  }, []); 
 
   // loadind the page
   if (isCheckingAuth && !authUser) {
